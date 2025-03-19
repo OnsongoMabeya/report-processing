@@ -91,7 +91,7 @@ This guide will help you set up MongoDB locally for the Report Processing System
 
 3. **Permission Issues**
    - Check MongoDB logs: `tail -f /usr/local/var/log/mongodb/mongo.log`
-   - Ensure data directory permissions: `chown -R `id -u` /usr/local/var/mongodb`
+   - Ensure data directory permissions: `chown -R` id -u `/usr/local/var/mongodb`
 
 ### Useful Commands
 
@@ -112,6 +112,7 @@ brew uninstall mongodb-community
 ## Development Workflow
 
 1. **Starting Development**
+
    ```bash
    # Ensure MongoDB is running
    brew services start mongodb-community
@@ -121,6 +122,7 @@ brew uninstall mongodb-community
    ```
 
 2. **Database Maintenance**
+
    ```bash
    # Connect to MongoDB shell
    mongosh
@@ -147,4 +149,4 @@ brew uninstall mongodb-community
 
 - [MongoDB Documentation](https://docs.mongodb.com/)
 - [MongoDB Community Server](https://www.mongodb.com/try/download/community)
-- [MongoDB Compass](https://www.mongodb.com/try/download/compass) (GUI Tool) 
+- [MongoDB Compass](https://www.mongodb.com/try/download/compass) (GUI Tool)
