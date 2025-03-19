@@ -21,25 +21,30 @@ A web-based system for processing PDF reports, extracting images, and generating
 
 1. Clone the repository
 2. Install dependencies:
+
    ```bash
    npm install
    ```
+
 3. Create a `.env` file in the root directory with the following variables:
-   ```
+
+   ```bash
    MONGODB_URI=your_mongodb_uri
    EMAIL_HOST=your_email_host
    EMAIL_USER=your_email_user
    EMAIL_PASSWORD=your_email_password
    JWT_SECRET=your_jwt_secret
    ```
+
 4. Run the development server:
+
    ```bash
    npm run dev
    ```
 
 ## Project Structure
 
-```
+```bash
 ├── app/                    # Next.js app directory
 │   ├── api/               # API routes
 │   ├── components/        # React components
@@ -57,7 +62,3 @@ A web-based system for processing PDF reports, extracting images, and generating
 3. Commit your changes
 4. Push to the branch
 5. Create a new Pull Request
-
-## License
-
-This project is licensed under the MIT License. 

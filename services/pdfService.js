@@ -77,6 +77,8 @@ class PDFService {
           withoutEnlargement: true
         })
         .normalize() // Normalize contrast
+        .modulate({ brightness: 1.1, saturation: 1.1 }) // Enhance image quality
+        .sharpen() // Sharpen the image
         .toFile(outputPath);
 
       logger.info(`Processed image saved to: ${outputPath}`);

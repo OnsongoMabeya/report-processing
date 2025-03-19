@@ -9,25 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "imap": "^0.8.19",
-    "pdf-lib": "^1.17.1",
-    "sharp": "^0.33.2",
-    "multer": "^1.4.5-lts.1",
-    "express": "^4.18.2",
+    "autoprefixer": "^10.4.17",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "imap": "^0.8.17",
     "mongoose": "^8.1.1",
-    "winston": "^3.11.0",
-    "@tensorflow/tfjs-node": "^4.17.0",
-    "tailwindcss": "^3.4.1",
+    "multer": "^1.4.5-lts.1",
+    "next": "^14.2.25",
+    "pdf-lib": "^1.17.1",
     "postcss": "^8.4.35",
-    "autoprefixer": "^10.4.17"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sharp": "^0.33.2",
+    "tailwindcss": "^3.4.1",
+    "winston": "^3.11.0"
   },
   "devDependencies": {
     "eslint": "^8.56.0",
     "eslint-config-next": "14.1.0"
   }
-} 
+}
