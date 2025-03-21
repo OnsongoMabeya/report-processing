@@ -40,7 +40,8 @@ jobs:
           npm run prepare
 
       - name: Run linting
-        run: npm run lint
+        run: |
+          npx eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0
 
       - name: Run tests
         run: npm test
