@@ -17,11 +17,15 @@
     "beforeAll": "readonly",
     "afterAll": "readonly",
     "jest": "readonly",
-    "Promise": "readonly"
+    "Promise": "readonly",
+    "path": "readonly",
+    "PDFLib": "readonly",
+    "PDFName": "readonly",
+    "PDFStream": "readonly"
   },
   "rules": {
-    "no-unused-vars": "warn",
-    "no-console": "warn",
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
     "@next/next/no-img-element": "warn"
   }
 } 
