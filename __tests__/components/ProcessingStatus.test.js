@@ -31,11 +31,14 @@ describe('ProcessingStatus', () => {
 
     it('renders processing status when API call succeeds', async () => {
         const mockStatus = {
-            status: 'Processing',
-            currentFile: 'test.pdf',
-            progress: 50,
-            queueLength: 2,
-            lastProcessed: '2025-03-21T11:40:51.000Z'
+            status: 'success',
+            data: {
+                isProcessing: true,
+                currentFile: 'test.pdf',
+                progress: 50,
+                queue: 2,
+                lastProcessed: '2025-03-21T11:40:51.000Z'
+            }
         }
 
         global.fetch.mockResolvedValueOnce({
@@ -58,11 +61,14 @@ describe('ProcessingStatus', () => {
 
     it('updates status periodically', async () => {
         const mockStatus = {
-            status: 'Processing',
-            currentFile: 'test.pdf',
-            progress: 50,
-            queueLength: 2,
-            lastProcessed: '2025-03-21T11:40:52.000Z'
+            status: 'success',
+            data: {
+                isProcessing: true,
+                currentFile: 'test.pdf',
+                progress: 50,
+                queue: 2,
+                lastProcessed: '2025-03-21T11:40:52.000Z'
+            }
         }
 
         global.fetch.mockResolvedValueOnce({
