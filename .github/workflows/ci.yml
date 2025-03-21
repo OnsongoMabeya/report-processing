@@ -15,7 +15,15 @@ jobs:
         image: mongo:latest
         ports:
           - 27017:27017
-        options: "--health-cmd \"mongosh --eval 'db.runCommand(\"ping\").ok' --quiet\" --health-interval 10s --health-timeout 10s --health-retries 5"
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand(\"ping\").ok' --quiet"
+          --health-interval 10s
+          --health-timeout 10s
+          --health-retries 5
+          --health-start-period 40s
 
     steps:
       - uses: actions/checkout@v4
@@ -37,7 +45,7 @@ jobs:
       - name: Run tests
         run: npm test
         env:
-          MONGODB_URI: mongodb://localhost:27017/report-processing-test
+          MONGODB_URI: mongodb://root:example@localhost:27017/report-processing-test?authSource=admin
           EMAIL_HOST: smtp.gmail.com
           EMAIL_PORT: 587
           EMAIL_USER: test@example.com
