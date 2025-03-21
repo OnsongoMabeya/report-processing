@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react'
-import ProcessingStatus from '@/app/components/ProcessingStatus'
+import ProcessingStatus from '../../app/components/ProcessingStatus'
 
 // Mock fetch globally
 global.fetch = jest.fn()
