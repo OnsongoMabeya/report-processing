@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, act } from '@testing-library/react'
 import ProcessingStatus from '@/components/ProcessingStatus'
 
 describe('ProcessingStatus', () => {
@@ -22,31 +22,34 @@ describe('ProcessingStatus', () => {
         render(<ProcessingStatus />)
         
         await waitFor(() => {
-        expect(screen.getByText('Error loading status')).toBeInTheDocument()
+            expect(screen.getByText('Error fetching status')).toBeInTheDocument()
         })
     })
 
     it('renders processing status when API call succeeds', async () => {
         const mockStatus = {
-        isProcessing: true,
-        currentFile: 'test.pdf',
-        progress: 50,
-        queue: 2,
-        lastProcessed: new Date().toISOString(),
+            status: 'success',
+            data: {
+                isProcessing: true,
+                currentFile: 'test.pdf',
+                progress: 50,
+                queue: 2,
+                lastProcessed: new Date().toISOString(),
+            }
         }
 
         global.fetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockStatus),
+            ok: true,
+            json: () => Promise.resolve(mockStatus),
         })
 
         render(<ProcessingStatus />)
 
         await waitFor(() => {
-        expect(screen.getByText('Processing')).toBeInTheDocument()
-        expect(screen.getByText('test.pdf')).toBeInTheDocument()
-        expect(screen.getByText('50%')).toBeInTheDocument()
-        expect(screen.getByText('2 files in queue')).toBeInTheDocument()
+            expect(screen.getByText('Processing')).toBeInTheDocument()
+            expect(screen.getByText('test.pdf')).toBeInTheDocument()
+            expect(screen.getByText('50%')).toBeInTheDocument()
+            expect(screen.getByText('2 files in queue')).toBeInTheDocument()
         })
     })
 
@@ -54,29 +57,34 @@ describe('ProcessingStatus', () => {
         jest.useFakeTimers()
 
         const mockStatus = {
-        isProcessing: true,
-        currentFile: 'test.pdf',
-        progress: 50,
-        queue: 2,
-        lastProcessed: new Date().toISOString(),
+            status: 'success',
+            data: {
+                isProcessing: true,
+                currentFile: 'test.pdf',
+                progress: 50,
+                queue: 2,
+                lastProcessed: new Date().toISOString(),
+            }
         }
 
         global.fetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockStatus),
+            ok: true,
+            json: () => Promise.resolve(mockStatus),
         })
 
         render(<ProcessingStatus />)
 
         await waitFor(() => {
-        expect(screen.getByText('Processing')).toBeInTheDocument()
+            expect(screen.getByText('Processing')).toBeInTheDocument()
         })
 
         // Fast forward 5 seconds
-        jest.advanceTimersByTime(5000)
+        await act(async () => {
+            jest.advanceTimersByTime(5000)
+        })
 
         await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalledTimes(2)
+            expect(global.fetch).toHaveBeenCalledTimes(2)
         })
 
         jest.useRealTimers()

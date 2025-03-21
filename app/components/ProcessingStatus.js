@@ -37,10 +37,32 @@ export default function ProcessingStatus() {
     return <div className="text-red-500 text-center py-4">{error}</div>;
   }
 
+  if (!status) {
+    return <div className="text-center py-4">No status available</div>;
+  }
+
   return (
     <div className="space-y-6">
       {/* Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="card">
+          <h3 className="text-lg font-semibold mb-2">Processing Status</h3>
+          <div className="space-y-1">
+            <p>Status: {status.isProcessing ? 'Processing' : 'Idle'}</p>
+            {status.currentFile && (
+              <p>Current File: {status.currentFile}</p>
+            )}
+            {status.progress !== undefined && (
+              <p>Progress: {status.progress}%</p>
+            )}
+            {status.queue !== undefined && (
+              <p>{status.queue} files in queue</p>
+            )}
+            {status.lastProcessed && (
+              <p>Last Processed: {new Date(status.lastProcessed).toLocaleString()}</p>
+            )}
+          </div>
+        </div>
         <div className="card">
           <h3 className="text-lg font-semibold mb-2">Reports</h3>
           <div className="space-y-1">
