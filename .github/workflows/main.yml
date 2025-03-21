@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm ci
+          npm ci --no-audit --no-fund
           npm run prepare
 
       - name: Cache Next.js build
@@ -31,6 +31,7 @@ jobs:
             .next/cache
             ${{ github.workspace }}/.next/cache
             ${{ github.workspace }}/.next/static
+            ${{ github.workspace }}/.next/server
           key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
@@ -48,7 +49,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --no-audit --no-fund
 
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0
@@ -81,7 +82,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --no-audit --no-fund
 
       - name: Run tests
         run: npm test -- --silent
@@ -125,7 +126,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --no-audit --no-fund
 
       - name: Restore Next.js cache
         uses: actions/cache@v4
@@ -134,6 +135,7 @@ jobs:
             .next/cache
             ${{ github.workspace }}/.next/cache
             ${{ github.workspace }}/.next/static
+            ${{ github.workspace }}/.next/server
           key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
