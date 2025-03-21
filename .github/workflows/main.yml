@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
 
     services:
@@ -36,12 +36,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install
+          npm ci
           npm run prepare
 
-      - name: Run linting
-        run: |
-          npx eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0
+      - name: Run ESLint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0
 
       - name: Run tests
         run: npm test
@@ -55,4 +54,7 @@ jobs:
           CHECK_INTERVAL: 300000
 
       - name: Build project
-        run: npm run build 
+        run: npm run build
+        env:
+          MONGODB_URI: mongodb://root:example@localhost:27017/report-processing-test?authSource=admin
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }} 
