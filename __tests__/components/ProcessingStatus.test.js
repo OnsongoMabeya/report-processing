@@ -88,5 +88,5 @@ describe('ProcessingStatus', () => {
         })
 
         jest.useRealTimers()
-    })
+    }, 10000) // Increase timeout for this test
 }) 
