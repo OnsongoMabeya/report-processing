@@ -51,10 +51,11 @@ describe('ProcessingStatus', () => {
         })
 
         await waitFor(() => {
-            expect(screen.getByText('Processing')).toBeInTheDocument()
-            expect(screen.getByText('test.pdf')).toBeInTheDocument()
-            expect(screen.getByText('50%')).toBeInTheDocument()
-            expect(screen.getByText('2 files in queue')).toBeInTheDocument()
+            // Use regex to match text content with optional whitespace
+            expect(screen.getByText(/Status:\s*Processing/)).toBeInTheDocument()
+            expect(screen.getByText(/Current File:\s*test.pdf/)).toBeInTheDocument()
+            expect(screen.getByText(/Progress:\s*50%/)).toBeInTheDocument()
+            expect(screen.getByText(/2\s*files in queue/)).toBeInTheDocument()
             expect(screen.getByText(/Last Processed:/)).toBeInTheDocument()
         })
     })
@@ -81,7 +82,7 @@ describe('ProcessingStatus', () => {
         })
 
         await waitFor(() => {
-            expect(screen.getByText('Processing')).toBeInTheDocument()
+            expect(screen.getByText(/Status:\s*Processing/)).toBeInTheDocument()
         }, { timeout: 3000 })
     })
 }) 
