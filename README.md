@@ -10,6 +10,8 @@ A web-based system for processing PDF reports, extracting images, and generating
 - Automatic caption generation
 - Interactive report generation
 - Real-time dashboard monitoring
+- **Reports Page**: View and manage processed reports
+- **Settings Page**: Configure email and processing settings
 
 ## Prerequisites
 
@@ -78,7 +80,8 @@ A web-based system for processing PDF reports, extracting images, and generating
 ├── app/ # Next.js app directory
 │ ├── api/ # API routes
 │ ├── components/ # React components
-│ └── pages/ # Page components
+│ ├── reports/ # Reports page
+│ └── settings/ # Settings page
 ├── lib/ # Utility functions and shared code
 ├── models/ # Database models
 ├── public/ # Static assets
