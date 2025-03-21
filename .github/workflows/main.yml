@@ -30,9 +30,10 @@ jobs:
           path: |
             .next/cache
             ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}
+            ${{ github.workspace }}/.next/static
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-nextjs-
+            ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
 
   lint:
     needs: setup
@@ -83,7 +84,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test
+        run: npm test -- --silent
         env:
           MONGODB_URI: mongodb://root:example@localhost:27017/report-processing-test?authSource=admin
           EMAIL_HOST: smtp.gmail.com
@@ -94,6 +95,7 @@ jobs:
           CHECK_INTERVAL: 300000
           JWT_SECRET: test-jwt-secret
           NODE_ENV: test
+          CI: true
 
   build:
     needs: [setup, lint, test]
@@ -125,6 +127,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Restore Next.js cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .next/cache
+            ${{ github.workspace }}/.next/cache
+            ${{ github.workspace }}/.next/static
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
+
       - name: Build project
         run: npm run build
         env:
@@ -138,6 +151,7 @@ jobs:
           CHECK_INTERVAL: 300000
           JWT_SECRET: test-jwt-secret
           NODE_ENV: production
+          CI: true
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
