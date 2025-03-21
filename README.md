@@ -47,6 +47,7 @@ A web-based system for processing PDF reports, extracting images, and generating
 - MongoDB (v7.0 or higher)
 - Python (v3.8 or higher, for YOLOv8 integration)
 - npm or yarn package manager
+- GitHub account (for CI/CD)
 
 ## Setup
 
@@ -155,6 +156,7 @@ A web-based system for processing PDF reports, extracting images, and generating
 - `npm run setup:mongodb` - Verify MongoDB setup
 - `npm run lint` - Run ESLint
 - `npm run format` - Format code with Prettier
+- `npm test` - Run tests
 
 ### Code Style
 
@@ -162,6 +164,44 @@ A web-based system for processing PDF reports, extracting images, and generating
 - Use Prettier for code formatting
 - Follow Next.js 14 best practices
 - Use TypeScript for type safety
+
+### Continuous Integration/Deployment
+
+The project uses GitHub Actions for CI/CD. The workflow includes:
+
+- Automated testing on push and pull requests
+- Linting and code style checks
+- Build verification
+- Automated deployment to production (main branch)
+- MongoDB service container for testing
+
+#### CI/CD Pipeline Steps
+
+1. **Test Job**
+   - Sets up Node.js environment
+   - Installs dependencies
+   - Runs linting
+   - Executes tests with MongoDB service
+   - Verifies build process
+
+2. **Deploy Job** (main branch only)
+   - Builds the project
+   - Deploys to production environment
+   - Requires successful test job completion
+
+#### Required Secrets
+
+For deployment, the following secrets need to be configured in GitHub:
+
+- `VERCEL_TOKEN` - Vercel deployment token
+- `ORG_ID` - Vercel organization ID
+- `PROJECT_ID` - Vercel project ID
+
+To set up secrets:
+
+1. Go to your GitHub repository
+2. Navigate to Settings > Secrets and variables > Actions
+3. Add the required secrets
 
 ## Contributing
 
@@ -171,6 +211,10 @@ A web-based system for processing PDF reports, extracting images, and generating
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
 ## Support
 
 For support, please refer to:
@@ -178,10 +222,12 @@ For support, please refer to:
 - MongoDB setup guide: `docs/mongodb-setup.md`
 - Email configuration guide: `docs/email-setup.md`
 - Report processing guide: `docs/report-processing.md`
+- CI/CD setup guide: `docs/ci-cd-setup.md`
 
 ## Acknowledgments
 
 - Next.js team for the amazing framework
 - MongoDB for the database solution
 - Sharp for image processing
+- GitHub Actions for CI/CD automation
 - All contributors and maintainers
