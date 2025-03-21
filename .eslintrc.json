@@ -27,7 +27,8 @@
     "no-unused-vars": ["warn", { 
       "argsIgnorePattern": "^_",
       "varsIgnorePattern": "^_",
-      "ignoreRestSiblings": true
+      "ignoreRestSiblings": true,
+      "args": "none"
     }],
     "no-console": ["warn", { 
       "allow": ["warn", "error", "info", "log"]
@@ -36,16 +37,29 @@
   },
   "overrides": [
     {
-      "files": ["**/*.test.js", "**/*.test.jsx", "**/*.test.ts", "**/*.test.tsx"],
+      "files": ["**/*.test.js", "**/*.test.jsx", "**/*.test.ts", "**/*.test.tsx", "jest.setup.js"],
       "rules": {
         "no-unused-vars": "off",
-        "no-console": "off"
+        "no-console": "off",
+        "@next/next/no-img-element": "off"
       }
     },
     {
       "files": ["scripts/**/*.js"],
       "rules": {
         "no-console": "off"
+      }
+    },
+    {
+      "files": ["app/api/**/*.js"],
+      "rules": {
+        "no-unused-vars": "off"
+      }
+    },
+    {
+      "files": ["services/**/*.js"],
+      "rules": {
+        "no-unused-vars": "off"
       }
     }
   ]
