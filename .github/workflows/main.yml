@@ -10,23 +10,23 @@ jobs:
     setup:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            -   uses: actions/checkout@v4
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
+            -   name: Setup Node.js
+                uses: actions/setup-node@v4
+                with:
                     node-version: '18'
                     cache: 'npm'
                     cache-dependency-path: package-lock.json
 
-            - name: Install dependencies
-              run: |
+            -   name: Install dependencies
+                run: |
                     npm ci --no-audit --no-fund
                     npx husky install --no-verify
 
-            - name: Cache Next.js build
-              uses: actions/cache@v4
-              with:
+            -   name: Cache Next.js build
+                uses: actions/cache@v4
+                with:
                     path: |
                         .next
                         ${{ github.workspace }}/.next
@@ -38,19 +38,19 @@ jobs:
         needs: setup
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            -   uses: actions/checkout@v4
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
+            -   name: Setup Node.js
+                uses: actions/setup-node@v4
+                with:
                     node-version: '18'
                     cache: 'npm'
 
-            - name: Install dependencies
-              run: npm ci --no-audit --no-fund
+            -   name: Install dependencies
+                run: npm ci --no-audit --no-fund
 
-            - name: Run ESLint
-              run: npx eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0
+            -   name: Run ESLint
+                run: npx eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0
 
     test:
         needs: setup
@@ -71,20 +71,20 @@ jobs:
                     --health-start-period 40s
 
         steps:
-            - uses: actions/checkout@v4
+            -   uses: actions/checkout@v4
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
+            -   name: Setup Node.js
+                uses: actions/setup-node@v4
+                with:
                     node-version: '18'
                     cache: 'npm'
 
-            - name: Install dependencies
-              run: npm ci --no-audit --no-fund
+            -   name: Install dependencies
+                run: npm ci --no-audit --no-fund
 
-            - name: Run tests
-              run: npm test -- --silent
-              env:
+            -   name: Run tests
+                run: npm test -- --silent
+                env:
                     MONGODB_URI: mongodb://root:example@localhost:27017/report-processing-test?authSource=admin
                     EMAIL_HOST: smtp.gmail.com
                     EMAIL_PORT: 587
@@ -115,20 +115,20 @@ jobs:
                     --health-start-period 40s
 
         steps:
-            - uses: actions/checkout@v4
+            -   uses: actions/checkout@v4
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
+            -   name: Setup Node.js
+                uses: actions/setup-node@v4
+                with:
                     node-version: '18'
                     cache: 'npm'
 
-            - name: Install dependencies
-              run: npm ci --no-audit --no-fund
+            -   name: Install dependencies
+                run: npm ci --no-audit --no-fund
 
-            - name: Restore Next.js cache
-              uses: actions/cache@v4
-              with:
+            -   name: Restore Next.js cache
+                uses: actions/cache@v4
+                with:
                     path: |
                         .next
                         ${{ github.workspace }}/.next
@@ -136,11 +136,11 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
 
-            - name: Build project
-              run: npm run build
-              env:
+            -   name: Build project
+                run: npm run build
+                env:
                     MONGODB_URI: mongodb://root:example@localhost:27017/report-processing-test?authSource=admin
-                    NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+                    NEXT_PUBLIC_API_URL: http://localhost:3000
                     EMAIL_HOST: smtp.gmail.com
                     EMAIL_PORT: 587
                     EMAIL_USER: test@example.com
@@ -151,9 +151,9 @@ jobs:
                     NODE_ENV: production
                     CI: true
 
-            - name: Upload build artifacts
-              uses: actions/upload-artifact@v4
-              with:
+            -   name: Upload build artifacts
+                uses: actions/upload-artifact@v4
+                with:
                     name: build-output
                     path: |
                         .next/
